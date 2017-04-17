@@ -1,0 +1,43 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "OTRS Test Initial Stack",
+	
+	    "Resources": {
+		"EC2Instance": {
+			"Type": "AWS::EC2::Instance",
+            "Properties": {
+				"ImageId": "ami-2cf0f13b",
+                "InstanceType": "t2.micro",
+				"SecurityGroupIds" : [ "sg-0f8dc972"],
+				"AvailabilityZone": "us-east-1b",
+				"SubnetId" : "subnet-52f1467f",
+				"IamInstanceProfile" : "APP_OTRS", 
+				"Tags": [                                                            
+					{"Key" : "AGS", "Value" : "OTRS"},
+                    {"Key" : "Name", "Value" : "AWSLXOTRS-SMED01"},
+                    {"Key" : "SDLC", "Value" : "DEV"},
+                    {"Key" : "Cost Center", "Value" : "ISE901"},
+                    {"Key" : "Owner", "Value" : "Gary Mikula"},
+                    {"Key" : "Role", "Value" : "OTRS Test Initial Stack"}],
+                "KeyName": "APP_OTRS_DEV_17-1",
+				"UserData" : {
+                    "Fn::Base64" : {
+                        "Fn::Join" : ["",
+                            [
+                            ]
+                        ]
+                    }
+                },				
+				"BlockDeviceMappings" : [
+			    {"DeviceName" : "/dev/xvdf",
+				"Ebs" : { "VolumeSize" : "25","DeleteOnTermination" : "true"}},
+				{"DeviceName" : "/dev/xvdg",
+				"Ebs" : { "VolumeSize" : "25","DeleteOnTermination" : "true"}},
+				{"DeviceName" : "/dev/xvdh",
+				"Ebs" : { "VolumeSize" : "25","DeleteOnTermination" : "true"}}
+				]
+			}
+    } 
+	},
+	"Outputs": {}              
+}
